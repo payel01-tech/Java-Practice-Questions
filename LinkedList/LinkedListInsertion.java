@@ -46,6 +46,32 @@ class LinkedList{
         }
     }
 
+    // delete at first
+    public void deleteFirst()
+    {
+        if(head == null)
+            System.out.println("The LinkedList is empty");
+        else{
+            LL.Node temp = head;
+            head = temp.next;
+        }
+    }
+
+    // delete at last
+    public void deleteLast()
+    {
+        if(head == null)
+            System.out.println("The LinkedList is empty");
+        else{
+            LL.Node temp = head;
+            while(temp.next.next != null)
+            {
+                temp=temp.next;
+            }
+            temp.next=null;
+        }
+    }
+
     // printing all the nodes
     public void printNodes()
     {
@@ -64,6 +90,11 @@ public class LinkedListInsertion {
         obj.addFirst("a");
         obj.addFirst("is");
         obj.addLast("method");
+        System.out.println("After Inserting All Nodes");
+        obj.printNodes();
+        obj.deleteFirst();
+        obj.deleteLast();
+        System.out.println("After Deleting First and Last Nodes");
         obj.printNodes();
     }
 }
