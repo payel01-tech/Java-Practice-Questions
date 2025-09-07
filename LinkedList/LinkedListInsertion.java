@@ -90,11 +90,11 @@ public class LinkedListInsertion {
         obj.addFirst("a");
         obj.addFirst("is");
         obj.addLast("method");
-        System.out.println("After Inserting All Nodes");
+        System.out.println("After Inserting All Nodes:");
         obj.printNodes();
         obj.deleteFirst();
         obj.deleteLast();
-        System.out.println("After Deleting First and Last Nodes");
+        System.out.println("\nAfter Deleting First and Last Nodes:");
         obj.printNodes();
     }
 }
