@@ -94,6 +94,23 @@ class DoubleLinkedListImpl{
             if (temp != null)
                 head = temp.previous;
     }
+
+    // reverse linkedlist using recursion
+    public DL.Node_Double reverseLinkedListRecursion(DL.Node_Double head)
+    {
+        if(head.next==null)
+            return head;
+
+        DL.Node_Double newNode = reverseLinkedListRecursion(head.next);
+
+        // first we have to cut down the link with the next node and
+        // need to make it reverse
+
+        head.next.next=head;
+        head.next=head.previous;
+        head.previous=null;
+        return newNode;
+    }
 }
 public class DoubleLinkedList {
     public static void main(String args[])
@@ -115,8 +132,8 @@ public class DoubleLinkedList {
 
         System.out.println();
 
-        obj.reverseNodes();
+        DL.Node_Double newHead = obj.reverseLinkedListRecursion(obj.getHead());
 
-        obj.printNodes(obj.getHead());
+        obj.printNodes(newHead);
     }
 }
