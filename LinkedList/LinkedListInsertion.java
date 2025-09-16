@@ -213,30 +213,31 @@ public class LinkedListInsertion {
         obj.printNodes(obj.getHead());
         System.out.println();
 
-//        LL.Node newHead=obj.reverseLinkedListRecursion(obj.getHead());
-//        System.out.println("After Reversing All Nodes:");
-//        obj.printNodes(newHead);
-//        System.out.println();
+//      LL.Node newHead=obj.reverseLinkedListRecursion(obj.getHead());
+//      System.out.println("After Reversing All Nodes:");
+//      obj.printNodes(newHead);
+//      System.out.println();
 
         LL.Node middleHead=obj.middleLinkedList(obj.getHead());
         System.out.print("Middle of All Nodes: "+middleHead.data);
-//
-//        obj.deletePosition(3);
-//        obj.printNodes();
-//        System.out.println();
-//
-//        int totalSize= obj.totalLLSize();
-//        System.out.println("Total Linkedlist size is: "+totalSize);
-//
-//        obj.deleteFirst();
-//        obj.deleteLast();
-//
-//        System.out.println("\nAfter Deleting First and Last Nodes:");
-//        obj.printNodes();
-//        System.out.println();
-//
-//        obj.totalLLSize();
-//        int totalSize1= obj.totalLLSize();
-//        System.out.println("Total Linkedlist size is: "+totalSize1);
+
+//      obj.deletePosition(3);
+//      obj.printNodes();
+//      System.out.println();
+
+//      int totalSize= obj.totalLLSize();
+//      System.out.println("Total Linkedlist size is: "+totalSize);
+
+//      obj.deleteFirst();
+//      obj.deleteLast();
+
+//      System.out.println("\nAfter Deleting First and Last Nodes:");
+//      obj.printNodes();
+//      System.out.println();
+
+//      obj.totalLLSize();
+//      int totalSize1= obj.totalLLSize();
+//      System.out.println("Total Linkedlist size is: "+totalSize1);
+
     }
 }

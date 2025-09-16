@@ -16,6 +16,7 @@ class DL{
 
 class DoubleLinkedListImpl{
     private DL.Node_Double head;
+    private DL.Node_Double tail;
     private int size;
 
     public DoubleLinkedListImpl()
@@ -53,16 +54,12 @@ class DoubleLinkedListImpl{
 
         if(head == null)
         {
-            this.head = newNode;
+            this.head = this.tail = newNode;
         }
         else{
-            DL.Node_Double currNode = head;
-            while(currNode.next != null)
-            {
-                currNode = currNode.next;
-            }
-            currNode.next = newNode;
-            newNode.previous = currNode;
+            tail.next = newNode;
+            newNode.previous = tail;
+            tail = newNode;
         }
     }
 
@@ -76,6 +73,27 @@ class DoubleLinkedListImpl{
         }
         System.out.print("NULL");
     }
+
+    // using iteration
+    public void reverseNodes()
+    {
+        DL.Node_Double temp=null;
+        DL.Node_Double currNode = head;
+        while(currNode != null)
+        {
+            // swap next and previous
+            temp = currNode.previous;
+            currNode.previous = currNode.next;
+            currNode.next = temp;
+
+            // move to next node (which was previous before swap)
+            currNode = currNode.previous;
+        }
+
+            // temp now points to the previous of the last processed node
+            if (temp != null)
+                head = temp.previous;
+    }
 }
 public class DoubleLinkedList {
     public static void main(String args[])
@@ -86,13 +104,18 @@ public class DoubleLinkedList {
 //        obj.addFirst("a");
 //        obj.addFirst("is");
 //        obj.addFirst("Java");
-//
 //        obj.printNodes(obj.getHead());
 
         obj.addLast("Java");
         obj.addLast("is");
         obj.addLast("a");
         obj.addLast("language");
+
+        obj.printNodes(obj.getHead());
+
+        System.out.println();
+
+        obj.reverseNodes();
 
         obj.printNodes(obj.getHead());
     }
