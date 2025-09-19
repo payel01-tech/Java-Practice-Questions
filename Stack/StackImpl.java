@@ -3,7 +3,7 @@ package Stack;
 import java.util.ArrayList;
 import java.util.List;
 
-class Stack{
+class Stack<I extends Number> {
     private List<String> ll=new ArrayList<>();
     private int top = -1;
 
@@ -38,7 +38,7 @@ class Stack{
 public class StackImpl {
     public static void main(String args[])
     {
-        Stack obj = new Stack();
+        Stack<Number> obj = new Stack<Number>();
         obj.push("2");
         obj.push("3");
         obj.push("4");
