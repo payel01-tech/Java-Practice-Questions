@@ -5,8 +5,6 @@ class Pair{
     public int key;
     public int value;
 
-    Pair(){}
-
     Pair(int key, int val)
     {
         this.key=key;

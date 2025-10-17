@@ -1,3 +1,8 @@
+// here we want to find the next greater element and we are finding the next greater element for each element from the end
+// we are checking if the stack is empty, if it's empty then we are storing -1 as the next greater element for any element
+// else if the top element of the stack is greater than the current i-th element then we are storing that value inside the result array
+// else we are popping out the smaller values until the value become greater than the current value.
+
 package Stack;
 
 import java.util.Stack;
@@ -34,6 +39,7 @@ public class NextGreaterElement {
 
             // Push current element
             values.push(arr[i]);
+
         }
         return result;
     }
