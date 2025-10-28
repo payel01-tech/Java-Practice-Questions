@@ -1,6 +1,6 @@
 package binarySearch;
 
-// we need to allocate pages to M no. of student so that the number of maximum allocated pages will be minimum
+// we need to allocate pages to M no. of students so that the number of maximum allocated pages will be minimum
 // we will apply binary search for this problem
 // first we will find the range of the numbers where our answer can lie
 // for that we can start from 0 and the end range will be the sum of the all pages

@@ -2,13 +2,16 @@ package binarySearch;
 
 import java.util.Arrays;
 
+// Assign C cows to N stalls such that the minimum distance of them is largest possible
+
 // here we need to find the largest value of minimum distance
 // for that we need to find the range from minimum distance to maximum distance of placing the cows
-// minimum distance will be one and maximum distance will be maximum value-minimum value
+// minimum distance will be one and maximum distance will be (maximum value-minimum value)
 // once we get the range then we can apply binary search on the range
 // for each mid value we can check if the mid is possible
 // if possible then we can check on the right side that if other than the possible mid
-// if there are other possible mid values by doing start=mid+1
+// why right side? because we'll find larger values on right side as we need to find the maximum possible value
+// if there are other possible mid-values by doing start=mid+1
 // if not possible then we can check on the left side as if a bigger value is not possible then
 // we must need a smaller value
 
@@ -46,12 +49,8 @@ class AggresiveCowsDistance{
     }
     int aggresiveCowsDistanceCalculation()
     {
-        int end=0,start=1,max=0, result=-1;
-        for(int i=0;i<nums.length;i++) //O(n)
-        {
-            max=Math.max(max,nums[i]);
-        }
-        end=max-start;
+        int end,start=1,result=-1;
+        end=nums[nums.length-1]-start;
         while(start<=end) //O(log(range/sum of the all possible values))*n) as we are calling isValid for all values
         {
             int mid=start+(end-start)/2;

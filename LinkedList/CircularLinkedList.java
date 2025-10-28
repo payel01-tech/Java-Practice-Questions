@@ -84,6 +84,46 @@ class CircularLinkedListImpl{
         }
         System.out.print(currentNode.data+"->back to "+head.data);
     }
+
+    // using iteration
+
+    public void reverseCircularLinkedList()
+    {
+        CL.Node_Circular previous = null;
+        CL.Node_Circular currNode = head;
+        CL.Node_Circular nextNode;
+
+        do{
+            nextNode = currNode.next;
+            currNode.next = previous;
+
+            previous = currNode;
+            currNode = nextNode;
+        }while(currNode != head);
+
+        head.next = previous;
+        head = previous;
+    }
+
+    // using recursive
+    public CL.Node_Circular reverseRecursionCircularLinkedList(CL.Node_Circular head)
+    {
+        if (head == null && head.next == head)
+            return head;
+
+        if(head.next.next == head){
+            CL.Node_Circular newNode = head.next;
+            head.next.next=head;
+            return newNode;
+        }
+
+        CL.Node_Circular newNode = reverseRecursionCircularLinkedList(head.next);
+
+        head.next.next = head;
+        head.next = newNode;
+
+        return newNode;
+    }
 }
 public class CircularLinkedList {
     public static void main(String args[])
@@ -103,6 +143,12 @@ public class CircularLinkedList {
         obj.addLast("language");
 
         obj.printNodes(obj.getHead());
+
+        CL.Node_Circular newHead = obj.reverseRecursionCircularLinkedList(obj.getHead());
+
+        System.out.println();
+
+        obj.printNodes(newHead);
     }
 }
 
