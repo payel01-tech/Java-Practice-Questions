@@ -27,14 +27,16 @@ class LRUCacheImpl{
     HashMap<Integer,LRU.DoubleLinkedList> map = new HashMap<>();
 
     public LRUCacheImpl(int capacity) {
-        this.capacity=capacity;
+        this.capacity = capacity;
+        head.next = tail;
+        tail.previous = head;
     }
 
     public void addFirstDoubleNode(LRU.DoubleLinkedList newNode)
     {
         LRU.DoubleLinkedList tempNext=head.next;
         newNode.previous=head;
-        newNode.next=head.next;
+        newNode.next=tempNext;
         head.next=newNode;
         tempNext.previous=newNode;
     }
@@ -43,22 +45,22 @@ class LRUCacheImpl{
     {
         LRU.DoubleLinkedList tempPrevious=oldNode.previous;
         LRU.DoubleLinkedList tempNext=oldNode.next;
-        head.next=tempNext;
+        tempPrevious.next=tempNext;
         tempNext.previous=tempPrevious;
     }
 
     public int get(int key) {
-
+        if(map.isEmpty() || !map.containsKey(key))
+            return -1;
+        int val=map.get(key).value;
+        LRU.DoubleLinkedList currentNode = map.get(key);
+        deleteDoubleNode(currentNode);
+        addFirstDoubleNode(currentNode);
+        map.put(key,currentNode);
+        return val;
     }
 
     public void put(int key, int value) {
-        // if map reaches to the capacity of the LRU Cache then we have to remove the least recently used node
-        if(map.size()==capacity)
-        {
-            map.remove(tail.previous.key);
-            deleteDoubleNode(tail.previous);
-        }
-
         // if linkedlist contains duplicate key like (1,1) and want to insert (1,3)
         // then we need to remove the old element from the linkedlist and map and insert the new element
         if(map.containsKey(key))
@@ -66,6 +68,14 @@ class LRUCacheImpl{
             deleteDoubleNode(map.get(key));
             map.remove(key);
         }
+
+        // if map reaches to the capacity of the LRU Cache then we have to remove the least recently used node
+        if(map.size()==capacity)
+        {
+            map.remove(tail.previous.key);
+            deleteDoubleNode(tail.previous);
+        }
+
         LRU.DoubleLinkedList newNode = new LRU().new DoubleLinkedList(key,value);
         addFirstDoubleNode(newNode);
         map.put(key,newNode);
@@ -76,6 +86,15 @@ class LRUCacheImpl{
 public class LRUCache {
     public static void main(String args[])
     {
-
+        LRUCacheImpl cache = new LRUCacheImpl(2);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        System.out.println(cache.get(1)); // 1
+        cache.put(3, 3); // evicts key 2
+        System.out.println(cache.get(2)); // -1
+        cache.put(4, 4); // evicts key 1
+        System.out.println(cache.get(1)); // -1
+        System.out.println(cache.get(3)); // 3
+        System.out.println(cache.get(4)); // 4
     }
 }
