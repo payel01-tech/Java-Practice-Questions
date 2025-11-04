@@ -1,10 +1,10 @@
 package Queue;
 
-class Queue{
+class Queue1 {
     int front=0,rear=-1,size=0,capacity;
     int arr[];
 
-    Queue(int size)
+    Queue1(int size)
     {
         this.capacity=size;
         arr=new int[size];
@@ -50,7 +50,7 @@ class Queue{
 public class CircularQueue {
     public static void main(String args[])
     {
-        Queue obj = new Queue(5);
+        Queue1 obj = new Queue1(5);
         obj.pop();
         obj.pop();
         obj.push(2);
