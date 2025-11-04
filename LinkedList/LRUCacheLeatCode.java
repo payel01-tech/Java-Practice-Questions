@@ -1,5 +1,19 @@
 package LinkedList;
 
+//We can only enter the no. of nodes that are equal to the capacity of the LRU Cache
+//To implement this LRU Cache we need to use two data structure, one is the linkedlist and another one is the map to store the key and the node corresponding to that key
+//whenever you will do put operation it means adding the node in first place as it will be the most recently used node and also storing the key and node in the map
+//
+//To add/put any nodes we need to consider some conditions
+//1. If we want to put (1,3) and there's a node already (1,1) in the map, then there's a match in the key that is 1,
+//then we need to delete that node from the linkedlist and from the map first and then we need to add the new node at first and also in the map
+//2. If the map size is equal to the capacity of the LRU Cache then we need to delete the last node and then need to add the new node at first and also in the map
+//
+//To get any nodes we need to consider some conditions
+//1. If the map is empty or the key doesn't exist then we need to return -1
+//2. Whenever we are trying to get any nodes, we need to first store the value of that node to return it
+//3. Then we need to delete that node from the linkedlist and map and then we need to add that node in the linkedlist at first position and map
+
 import java.util.HashMap;
 
 public class LRUCacheLeatCode {
@@ -52,6 +66,7 @@ public class LRUCacheLeatCode {
             int val=map.get(key).value;
             DoubleLinkedList currentNode = map.get(key);
             deleteDoubleNode(currentNode);
+            map.remove(key);
             addFirstDoubleNode(currentNode);
             map.put(key,currentNode);
             return val;
