@@ -32,17 +32,33 @@ public class IdenticalBinaryTree {
         boolean isRight=identicalTree(p.right,q.right);
         return (isLeft && isRight && p.data==q.data);
     }
+
+    public static boolean isSubTree(Node root, Node subRoot)
+    {
+        if(root==null || subRoot==null)
+            return root==subRoot;
+        if(root.data == subRoot.data && identicalTree(root,subRoot))
+            return true;
+        return isSubTree(root.left,subRoot) || isSubTree(root.right,subRoot);
+    }
     public static void main(String args[])
     {
         int arr1[]=new int[]{1,2,-1,-1,3,4,-1,-1,5,-1,-1};
         int arr2[]=new int[]{1,2,-1,-1,3,4,-1,-1,5,-1,-1};
+        int arr3[]=new int[]{3,4,-1,-1,6,5,8};
         Node root1 =buildBinaryTree(arr1);
         index=-1;
         Node root2 =buildBinaryTree(arr2);
+        index=-1;
+        Node root3 =buildBinaryTree(arr3);
         displayTree(root1);
         System.out.println();
         displayTree(root2);
+        System.out.println();
+        displayTree(root3);
         boolean result= identicalTree(root1,root2);
         System.out.print(result ? "\nBoth the trees are identical" : "\nBoth the trees are not identical");
+        boolean result1= isSubTree(root1,root3);
+        System.out.print(result1 ? "\nBoth the tree and subtree is identical" : "\nBoth the tree and subtree is not identical");
     }
 }
