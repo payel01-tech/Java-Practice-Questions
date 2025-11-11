@@ -1,7 +1,8 @@
 package BinaryTree;
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 class Node{
@@ -18,6 +19,7 @@ class Node{
 
 public class BuildBinaryTree {
     static int index=-1;
+    static int ans=0;
     public static Node buildBinaryTree(int[] preOrder)
     {
         index++;
@@ -103,6 +105,7 @@ public class BuildBinaryTree {
             return 0;
         int left_height=height(root.left); //will return 1 to the main root
         int right_height=height(root.right); //will return 2 to the main root
+        ans=Math.max(ans,left_height+right_height);
         return Math.max(left_height,right_height)+1; //will return 3 from the main root to the calling point
     }
 
@@ -124,6 +127,59 @@ public class BuildBinaryTree {
         return (left_sum+right_sum+root.data); //will return the sum of the left+right subtree+the root data from the main root to the calling point
     }
 
+    public static int diameterOfBinaryTree(Node root) {
+//        if(root==null)
+//            return 0;
+//        int leftDiameter=diameterOfBinaryTree(root.left);
+//        int rightDiameter=diameterOfBinaryTree(root.right);
+//        int currentDiameter=height(root.left)+height(root.right);
+//        int MaxDiameter=Math.max(leftDiameter,rightDiameter);
+//        return Math.max(MaxDiameter,currentDiameter);
+        height(root);
+        return ans;
+    }
+
+    public static void kthLevelofTree(Node root,int k)
+    {
+        if(root==null)
+            return;
+        if(k==1)
+        {
+            System.out.print(root.data+" ");
+            return;
+        }
+        kthLevelofTree(root.left,k-1);
+        kthLevelofTree(root.right,k-1);
+    }
+
+    public static int sumTree(Node root)
+    {
+        if(root==null)
+            return 0;
+        int leftSumTree=sumTree(root.left);
+        int rightSumTree=sumTree(root.right);
+        root.data+=leftSumTree+rightSumTree;
+        return root.data;
+    }
+
+    public static void binaryTreePaths(Node root,String path,List<String> ans) {
+        if(root.left==null && root.right==null){
+            ans.add(path);
+            return;
+        }
+        if(root.left !=null)
+            binaryTreePaths(root.left,path+"->"+String.valueOf(root.left.data),ans);
+        if(root.right !=null)
+            binaryTreePaths(root.right,path+"->"+String.valueOf(root.right.data),ans);
+    }
+
+    public static List<String> binaryTreePaths(Node root) {
+        String path=String.valueOf(root.data);
+        List<String> ans=new ArrayList<>();
+        binaryTreePaths(root,path,ans);
+        return ans;
+    }
+
     public static void main(String args[])
     {
         int arr[]=new int[]{1,2,-1,-1,3,4,-1,-1,5,-1,-1};
@@ -143,5 +199,18 @@ public class BuildBinaryTree {
         System.out.println("Total no. of nodes of the Binary Tree through Recursion is: "+countTree);
         int sumTree=sum(root);
         System.out.println("Total sum of nodes of the Binary Tree through Recursion is: "+sumTree);
+        int DiameterTree=diameterOfBinaryTree(root);
+        System.out.println("Diameter of the Binary Tree through Recursion is: "+DiameterTree);
+        int level = 3;
+        System.out.println(level+"th level of tree");
+        kthLevelofTree(root,level);
+        int sumTreeValue= sumTree(root);
+        System.out.println("\nTotal Sum of the Tree is: "+sumTreeValue);
+        System.out.println("PreOrder Traversal: ");
+        PreOrder_Traversal(root);
+        System.out.println("\nBinary Tree Paths are");
+        List<String> ans=binaryTreePaths(root);
+        for(String val:ans)
+            System.out.println(val);
     }
 }
