@@ -10,10 +10,8 @@ package Array;
 // then we'll return slow/fast pointer value
 
 public class FindDuplicateSlowFastPointer {
-    public static int FindDuplicateSlowFastPointer(int nums[])
-    {
+    public static int FindDuplicateSlowFastPointer(int nums[]) {
         int slow=nums[0], fast=nums[0];
-
         do{
             slow=nums[slow]; //slow=slow+1
             fast=nums[nums[fast]]; //fast=fast+2
@@ -25,7 +23,6 @@ public class FindDuplicateSlowFastPointer {
             slow=nums[slow]; //slow=slow+1
             fast=nums[fast]; //fast=fast+1
         }
-
         return slow;
     }
 

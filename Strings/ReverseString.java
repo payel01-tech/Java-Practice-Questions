@@ -11,4 +11,18 @@ public class ReverseString {
         }
         System.out.println("Reverse String= "+rev);
     }
+
+    public static int dummy(int[] arr)
+    {
+       int temp=0;
+       for(int i=1;i<arr.length;i++)
+       {
+           if(arr[temp]!=arr[i])
+           {
+               arr[temp+1]=arr[i];
+               temp=temp+1;
+           }
+       }
+       return temp+1;
+    }
 }
